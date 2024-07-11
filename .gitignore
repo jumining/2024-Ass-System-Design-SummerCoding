@@ -36,5 +36,10 @@ out/
 ### VS Code ###
 .vscode/
 
-### yml ###
-*.yml
+### secret ###
+*.env
+application.yml
+
+### grafana ###
+/grafana-data/
+**/grafana-data/
