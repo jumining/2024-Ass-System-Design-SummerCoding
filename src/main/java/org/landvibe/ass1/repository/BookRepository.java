@@ -10,4 +10,5 @@ public interface BookRepository {
     Book save(Book book);
     Optional<Book> findBookById(Long id);
     List<Book> findAllBooks();
+    Long deleteBookById(Long id);
 }

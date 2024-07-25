@@ -109,6 +109,33 @@ public class JdbcBookRepository implements BookRepository {
         }
     }
 
+    @Override
+    public Long deleteBookById(Long id) {
+        String sql = "delete from books where id = ?";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return id;
+            } else {
+                return -1L;
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
+    }
+
 
     private Connection getConnection() {
         return DataSourceUtils.getConnection(dataSource);
